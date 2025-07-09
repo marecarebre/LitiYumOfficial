@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <title>LitiYum Official website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Oswald', sans-serif;
+      background-color: #0b0b0b;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    header img {
+      width: 100%;
+      height: 60vh;
+      object-fit: cover;
+      display: block;
+      transition: height 0.5s ease;
+    }
+
+    header.shrink img {
+      height: 30vh;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #0b0b0b 100%);
+    }
+
+    nav {
+      background-color: #111;
+      padding: 15px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #f5f5f5;
+      margin: 0 20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #e63946;
+    }
+
+    section {
+      padding: 60px 5%;
+    }
+
+    section:nth-child(even) {
+      background-color: #111;
+    }
+
+    h2 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      border-left: 5px solid #e63946;
+      padding-left: 15px;
+    }
+
+    p {
+      font-size: 1.1em;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .lightbox button {
+      margin: 20px;
+      padding: 10px 20px;
+      background: #e63946;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .video-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    video {
+      width: 100%;
+      border: 2px solid #e63946;
+      border-radius: 5px;
+    }
+
+    .gigs {
+      background-color: #111;
+      padding: 40px 5%;
+    }
+
+    .gig-item {
+      background-color: #222;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 5px solid #e63946;
+    }
+
+    .merch {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .merch img {
+      width: 100%;
+      border: 2px solid #e63946;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <img src="logo.png" alt="LITIYUM logotip" />
+  </header>
+
+  <nav>
+    <a href="#o-bendu">O bendu</a>
+    <a href="#galerija">Galerija</a>
+    <a href="#video">Video</a>
+    <a href="#merch">Merch</a>
+    <a href="#gigs">Nastopi</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+
+<section id="o-bendu">
+    <h2>O bendu</h2>
+    <p>LITIYUM je Yugo Rock'n'Roll bend iz Litije. Preigravamo legendarne uspešnice: Partibrejkers, Yu Grupa, Zabranjeno pušenje, Prljavo kazalište, Divlje jagode, Majke, Bajaga ...</p>
+    <p>Člani: Bane (vokal), Simon - Siko (bobni), Štile (lead/ritem kitara), Mark (lead/ritem kitara), Perc (bas).</p>
+  </section>
+
+  <section id="galerija">
+    <h2>Galerija</h2>
+    <div class="gallery">
+      <img src="bend.jpg" alt="Bend 1" onclick="openLightbox(0)" />
+      <img src="bend2.jpg" alt="Bend 2" onclick="openLightbox(1)" />
+      <img src="bend3.jpg" alt="Bend 3" onclick="openLightbox(2)" />
+      <img src="bend4.jpg" alt="Bend 4" onclick="openLightbox(3)" />
+      <img src="bend5.jpg" alt="Bend 5" onclick="openLightbox(4)" />
+      <img src="bend6.jpg" alt="Bend 6" onclick="openLightbox(5)" />
+      <img src="bend7.jpg" alt="Bend 7" onclick="openLightbox(6)" />
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <img id="lightbox-img" src="" alt="Lightbox Image" />
+      <div>
+        <button onclick="prevImage()">Prejšnja</button>
+        <button onclick="nextImage()">Naslednja</button>
+        <button onclick="closeLightbox()">Zapri</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="video">
+    <h2>Video</h2>
+    <div class="video-container">
+      <video controls>
+        <source src="litiyum3.mp4" type="video/mp4" />
+        Tvoj brskalnik ne podpira videa.
+      </video>
+    </div>
+  </section>
+
+  <section id="merch">
+    <h2>Merch</h2>
+    <div class="merch">
+      <img src="majica1.jpg" alt="Majica 1" />
+      <img src="majica2.png" alt="Majica 2" />
+      <img src="hoodie1.png" alt="Hoodie 1" />
+    </div>
+  </section>
+
+  <section id="gigs">
+    <h2>Prihajajoči nastopi</h2>
+    <div class="gig-item">
+      <h3>25. december 2025 - Litija</h3>
+      <p>Kraj: Mladinski center Litija<br />Začetek: 20:00</p>
+    </div>
+    <div class="gig-item">
+      <h3>20. februar 2026 - Stožice</h3>
+      <p>Kraj: Arena Stožice, Ljubljana<br />Začetek: 20:00</p>
+    </div>
+    <div class="gig-item">
+      <h3>24. maj 2026 - Križanke</h3>
+      <p>Kraj: Križanke, Ljubljana<br />Začetek: 20:00</p>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Email: <a href="mailto:litiyumband@gmail.com">litiyumband@gmail.com</a></p>
+    <p>Telefon: 041 710 100</p>
+    <p>Spremljaj nas:
+      <a href="https://www.facebook.com/profile.php?id=61571518877987&locale=sl_SI" target="_blank">Facebook</a> |
+      <a href="#" target="_blank">Instagram</a> |
+      <a href="#" target="_blank">YouTube</a>
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 LITIYUM. Vse pravice pridržane.
+  </footer>
+
+  <script>
+    // Logo shrink
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('shrink');
+      } else {
+        header.classList.remove('shrink');
+      }
+    });
+
+    // Lightbox
+    const images = [
+      'bend.jpg',
+      'bend2.jpg',
+      'bend3.jpg',
+      'bend4.jpg',
+      'bend5.jpg',
+      'bend6.jpg',
+      'bend7.jpg'
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById('lightbox-img').src = images[currentIndex];
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      document.getElementById('lightbox-img').src = images[currentIndex];
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[currentIndex];
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox.style.display === 'flex') {
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+  </script>
+
+</body>
+</html>
